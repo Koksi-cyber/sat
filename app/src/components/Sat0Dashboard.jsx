@@ -190,7 +190,7 @@ export function Sat0Dashboard() {
       {/* ========================================= */}
 
       <h2 className="dashboard-title">
-        Sat0 Dashboard
+        BitSats Dashboard
       </h2>
 
       {/* ========================================= */}
