@@ -1,0 +1,36 @@
+BitSats: Buy & Sell Through BaseScan  
+One-page explorer guide for using the router contract  
+Item Address / Value  
+Token contract  0x7700D683731a860523437d3476842Fa08ED2C15e  
+Router contract  0x97137d335b29743E1b9434f8Cc594D50572dE5a7  
+A. Buy tokens with ETH  
+1. Open the router contract on BaseScan and connect your wallet: Contract -> Write Contract -> Connect to Web3.  
+2. Find the buy function. In the Value field, enter the ETH amount to spend, e.g. 0.001 ETH.  
+3. Enter the PoolKey exactly as required by the form. Use native ETH as currency0: 0x0000000000000000000000000000000000000000 . 
+4. Use your wallet address as recipient.  
+5. Click Write, approve the wallet prompt, then wait for confirmation.  
+B. Approve the router before selling  
+1. Open the token contract on BaseScan: Contract -> Write Contract -> Connect to Web3.  
+2. Call approve(spender, amount).  
+approve field  Enter this  
+spender  0x97137d335b29743E1b9434f8Cc594D50572dE5a7  
+amount  115792089237316195423570985008687907853269984665640564039457584007913129639935  
+This amount is max uint256. It gives the router a maximum allowance, so users do not need to approve before every sell. Only approve contracts you 
+trust.  
+C. Sell tokens for ETH  
+1. Open the router contract again: Contract -> Write Contract -> Connect to Web3.  
+2. Find the sell function.  
+3. Enter the same PoolKey used for buying. Enter your wallet as recipient.  
+4. Enter the token amount in 18 -decimal units. Example: 1 token = 1000000000000000000.  
+5. Click Write and confirm in your wallet.  
+PoolKey reminder  
+currency0  0x0000000000000000000000000000000000000000  
+currency1  Token contract address above  
+fee 3000 
+tickSpacing  60 
+hooks  Hook contract address used when the pool was initialized  
+tuple format  (currency0,currency1,3000,60,hooks)  
+Safety notes:  
+• Use the correct network and explorer. Buy transactions must include ETH in the Value field.  
+• If BaseScan says the transaction may revert, check the PoolKey, wallet balance, approval.  
+ 
