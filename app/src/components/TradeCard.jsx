@@ -82,13 +82,13 @@ export function TradeCard() {
     <div className="trade-card trade-interface">
       <div className="tabs">
         <div 
-          className={`tab ${activeTab === 'buy' ? 'active' : ''}`}
+          className={`tab tab-buy ${activeTab === 'buy' ? 'active' : ''}`}
           onClick={() => { setActiveTab('buy'); setAmount(''); }}
         >
           Buy
         </div>
         <div 
-          className={`tab ${activeTab === 'sell' ? 'active' : ''}`}
+          className={`tab tab-sell ${activeTab === 'sell' ? 'active' : ''}`}
           onClick={() => { setActiveTab('sell'); setAmount(''); }}
         >
           Sell
@@ -118,7 +118,7 @@ export function TradeCard() {
       {!isConnected ? (
         <button className="btn" disabled>Connect Wallet to Trade</button>
       ) : activeTab === 'buy' ? (
-        <button className="btn btn-buy" onClick={handleBuy} disabled={!amount || isPending}>
+        <button className="btn" onClick={handleBuy} disabled={!amount || isPending}>
           {isPending ? <div className="loader"></div> : 'Buy BitSats'}
         </button>
       ) : (
@@ -128,7 +128,7 @@ export function TradeCard() {
               {isPending ? <div className="loader"></div> : 'Approve Router'}
             </button>
           ) : (
-            <button className="btn btn-sell" onClick={handleSell} disabled={!amount || isPending}>
+            <button className="btn" onClick={handleSell} disabled={!amount || isPending}>
               {isPending ? <div className="loader"></div> : 'Sell BitSats'}
             </button>
           )}

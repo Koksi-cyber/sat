@@ -18,8 +18,9 @@ import { useEthPrice } from "../hooks/useEthPrice";
 // CURVE CONSTANTS
 // ======================================================
 
-const K = 21_000_000;
-const S = 1000;
+const K = 1_000_000;
+const S = 33.333333333333333333;
+const K_SUPPLY = 1_000_000;
 
 // ======================================================
 // CURVE MATH
@@ -136,7 +137,7 @@ export function Sat0Dashboard() {
         const forwardSupply = totalMinted(ethCum);
         const drift = supply - forwardSupply;
         const backingPerToken = reserveEth / supply;
-        const completion = (supply / K) * 100;
+        const completion = (supply / K_SUPPLY) * 100;
 
         setStats({
           supply,
@@ -273,11 +274,13 @@ export function Sat0Dashboard() {
           valueClassName="text-mint"
         />
 
+        {/* 
         <MetricCard
           title="Curve Drift"
           value={(stats.drift || 0).toFixed(2)}
           valueClassName="text-burn"
         />
+        */}
       </div>
 
       {/* ========================================= */}

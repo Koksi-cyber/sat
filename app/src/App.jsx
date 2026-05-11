@@ -1,4 +1,5 @@
 import React from 'react'
+import { Analytics } from "@vercel/analytics/react"
 import { Navbar } from './components/Navbar'
 import { TradeCard } from './components/TradeCard'
 import { TokenPriceCard } from './components/TokenPriceCard'
@@ -7,6 +8,7 @@ import { Sat0Dashboard } from './components/Sat0Dashboard'
 function App() {
   return (
     <>
+      <Analytics />
       <Navbar />
       <div className="app-container">
         <aside className="info-sidebar">
