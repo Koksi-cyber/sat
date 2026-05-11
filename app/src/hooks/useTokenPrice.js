@@ -2,9 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { createPublicClient, http, formatEther, formatUnits } from 'viem';
 import { base } from 'viem/chains';
 import { HOOK_ADDRESS, HOOK_ABI } from '../config/contracts';
-
-// Alchemy RPC — same keys already used in Providers.jsx
-const ALCHEMY_RPC = 'https://base-mainnet.g.alchemy.com/v2/sjwwAR4WKLjP1b9yNfSBC';
+import { publicClient } from '../config/rpc';
 
 // Bonding-curve constants (from the contract math)
 const K = 1_000_000;
@@ -28,11 +26,6 @@ function quoteSell(currentTotal, tokenIn) {
   );
 }
 
-// Standalone viem client — no wallet needed, read-only
-const publicClient = createPublicClient({
-  chain: base,
-  transport: http(ALCHEMY_RPC),
-});
 
 export function useTokenPrice() {
   const [price, setPrice] = useState('—');

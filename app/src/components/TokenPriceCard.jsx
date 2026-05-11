@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTokenPrice } from '../hooks/useTokenPrice';
-import { useEthPrice } from '../hooks/useEthPrice';
+// import { useEthPrice } from '../hooks/useEthPrice';
 
 export function TokenPriceCard() {
   const { price, supply, reserve, fees, loading, error } = useTokenPrice();
-  const ethPrice = useEthPrice();
+  // const ethPrice = useEthPrice();
 
   return (
     <div className="trade-card info-card price-card">
@@ -24,21 +24,25 @@ export function TokenPriceCard() {
         <p className="text-sm" style={{ color: '#ef4444' }}>Error: {error}</p>
       ) : (
         <div className="price-grid">
+{/* 
           <div className="price-stat">
             <span className="price-stat-label">Live ETH Price</span>
             <span className="price-stat-value text-success">
               {typeof ethPrice === 'number' ? `$${ethPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '...'}
             </span>
           </div>
+          */}
           <div className="price-stat">
             <span className="price-stat-label">Token Price</span>
             <span className="price-stat-value text-market accent-glow">
               {price} <small>ETH</small>
+              {/* 
               {typeof ethPrice === 'number' && price !== '—' && (
                 <small style={{ marginLeft: '6px', color: 'var(--text-secondary)' }}>
                   (${ (parseFloat(price) * ethPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 }) })
                 </small>
               )}
+              */}
             </span>
           </div>
           <div className="price-stat">

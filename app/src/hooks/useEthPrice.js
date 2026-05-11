@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { createPublicClient, http, formatUnits } from 'viem';
 import { base } from 'viem/chains';
 
-const publicClient = createPublicClient({
-  chain: base,
-  transport: http('https://base-mainnet.g.alchemy.com/v2/sjwwAR4WKLjP1b9yNfSBC'),
-});
+import { publicClient } from '../config/rpc';
+
 
 const CHAINLINK_ETH_USD_ADDRESS = '0x71041dddad3595F9CEd3Dc2bA56DC7012B65A3d1';
 const CHAINLINK_ABI = [

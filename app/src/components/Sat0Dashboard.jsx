@@ -12,7 +12,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { HOOK_ADDRESS, HOOK_ABI } from "../config/contracts";
-import { useEthPrice } from "../hooks/useEthPrice";
+// import { useEthPrice } from "../hooks/useEthPrice";
 
 // ======================================================
 // CURVE CONSTANTS
@@ -48,18 +48,15 @@ function spotPrice(currentTotal) {
   return S / (K - currentTotal);
 }
 
-// Standalone viem client — no wallet needed, read-only
-const publicClient = createPublicClient({
-  chain: base,
-  transport: http('https://base-mainnet.g.alchemy.com/v2/sjwwAR4WKLjP1b9yNfSBC'), // Using the Alchemy RPC for consistency
-});
+import { publicClient } from '../config/rpc';
+
 
 // ======================================================
 // MAIN COMPONENT
 // ======================================================
 
 export function Sat0Dashboard() {
-  const ethPrice = useEthPrice();
+  // const ethPrice = useEthPrice();
   const [stats, setStats] = useState({
     supply: 0,
     reserveEth: 0,
@@ -203,11 +200,13 @@ export function Sat0Dashboard() {
           value={
             <>
               {(stats.marketCapEth || 0).toFixed(2)} ETH
+              {/* 
               {ethPrice && stats.marketCapEth > 0 && (
                 <small style={{ marginLeft: '6px', color: 'var(--text-secondary)', fontSize: '0.7em' }}>
                   (${((stats.marketCapEth || 0) * ethPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })})
                 </small>
               )}
+              */}
             </>
           }
         />
@@ -249,11 +248,13 @@ export function Sat0Dashboard() {
           value={
             <>
               {(stats.burnPrice || 0).toFixed(10)} ETH
+              {/* 
               {ethPrice && stats.burnPrice > 0 && (
                 <small style={{ marginLeft: '6px', color: 'var(--text-secondary)', fontSize: '0.7em' }}>
                   (${((stats.burnPrice || 0) * ethPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })})
                 </small>
               )}
+              */}
             </>
           }
           valueClassName="text-burn"
@@ -264,11 +265,13 @@ export function Sat0Dashboard() {
           value={
             <>
               {(stats.mintPrice || 0).toFixed(10)} ETH
+              {/* 
               {ethPrice && stats.mintPrice > 0 && (
                 <small style={{ marginLeft: '6px', color: 'var(--text-secondary)', fontSize: '0.7em' }}>
                   (${((stats.mintPrice || 0) * ethPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })})
                 </small>
               )}
+              */}
             </>
           }
           valueClassName="text-mint"
