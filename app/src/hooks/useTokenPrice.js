@@ -65,17 +65,22 @@ export function useTokenPrice() {
         ],
       });
 
-      const totalMintedFair = results[0].result;
-      const reserveEth = results[1].result;
-      const feesAccrued = results[2].result;
+      const totalMintedFair = results?.[0]?.status === 'success' ? results[0].result : 0n;
+      const reserveEth = results?.[1]?.status === 'success' ? results[1].result : 0n;
+      const feesAccrued = results?.[2]?.status === 'success' ? results[2].result : 0n;
 
       // Convert from wei → human-readable
-      const supplyReadable = Number(formatUnits(totalMintedFair, 18));
-      const reserveReadable = Number(formatEther(reserveEth));
-      const feesReadable = Number(formatEther(feesAccrued));
+      // formatUnits/formatEther throw if passed undefined/null, so we default to 0n
+      const supplyReadable = Number(formatUnits(totalMintedFair || 0n, 18));
+      const reserveReadable = Number(formatEther(reserveEth || 0n));
+      const feesReadable = Number(formatEther(feesAccrued || 0n));
 
       // Spot price = ETH received for selling 1 token at current supply
-      const tokenPriceEth = quoteSell(supplyReadable, 1);
+      // We handle the 0 supply case by returning a base price or 0
+      let tokenPriceEth = 0;
+      if (supplyReadable >= 1) {
+        tokenPriceEth = quoteSell(supplyReadable, 1);
+      }
 
       setPrice(tokenPriceEth.toFixed(12));
       setSupply(supplyReadable.toLocaleString());
@@ -84,7 +89,7 @@ export function useTokenPrice() {
       setError(null);
     } catch (err) {
       console.error('useTokenPrice error:', err);
-      setError(err.message);
+      setError(err.message || 'Unknown data fetch error');
     } finally {
       setLoading(false);
     }

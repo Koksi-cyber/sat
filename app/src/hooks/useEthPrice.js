@@ -41,7 +41,7 @@ export function useEthPrice() {
           functionName: 'latestRoundData',
         });
         
-        if (isMounted && data && data[1]) {
+        if (isMounted && data && typeof data[1] !== 'undefined' && data[1] !== null) {
           // Chainlink USD feeds always use 8 decimals
           const price = Number(formatUnits(data[1], 8));
           setEthPrice(price);

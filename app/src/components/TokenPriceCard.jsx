@@ -27,14 +27,14 @@ export function TokenPriceCard() {
           <div className="price-stat">
             <span className="price-stat-label">Live ETH Price</span>
             <span className="price-stat-value text-success">
-              {ethPrice ? `$${ethPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '...'}
+              {typeof ethPrice === 'number' ? `$${ethPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '...'}
             </span>
           </div>
           <div className="price-stat">
             <span className="price-stat-label">Token Price</span>
             <span className="price-stat-value text-market accent-glow">
               {price} <small>ETH</small>
-              {ethPrice && price !== '—' && (
+              {typeof ethPrice === 'number' && price !== '—' && (
                 <small style={{ marginLeft: '6px', color: 'var(--text-secondary)' }}>
                   (${ (parseFloat(price) * ethPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 }) })
                 </small>
